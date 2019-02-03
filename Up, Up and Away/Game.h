@@ -1,6 +1,15 @@
 #pragma once
+#include"pch.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
+#include "GameObjectManager.h"
+
+#define WIDTH 1024
+#define HEIGHT 768
+
+class GameObjectManager;
+
 class Game
 {
 private:
@@ -14,6 +23,9 @@ private:
 
 	static GameState gameState;
 	static sf::RenderWindow window;
+	static sf::Clock clock;
+	
+	static GameObjectManager gameObjectManager;
 
 public:
 	Game();

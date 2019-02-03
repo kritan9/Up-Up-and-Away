@@ -1,2 +1,8 @@
 ﻿  Game.cpp
+  GameObject.cpp
+d:\project\c++ project\up, up and away\up, up and away\gameobjectmanager.h(22): warning C4150: deletion of pointer to incomplete type 'GameObject'; no destructor called
+  d:\project\c++ project\up, up and away\up, up and away\gameobjectmanager.h(3): note: see declaration of 'GameObject'
+  GameObjectManager.cpp
+  Main.cpp
+  Generating Code...
   Up, Up and Away.vcxproj -> D:\Project\C++ Project\Up, Up and Away\Debug\Up, Up and Away.exe
