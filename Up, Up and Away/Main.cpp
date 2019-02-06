@@ -1,8 +1,5 @@
-#include "pch.h"
-#include <iostream>
-#include <string>
-#include "Game.h"
-
+#include"pch.h"
+#include "Main.h"
 
 int main()
 {

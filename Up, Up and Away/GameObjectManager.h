@@ -1,4 +1,5 @@
 #pragma once
+#include "pch.h"
 #include"GameObject.h"
 class GameObject;
 class GameObjectManager

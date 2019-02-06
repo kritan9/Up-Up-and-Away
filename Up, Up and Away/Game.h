@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
 #include "GameObjectManager.h"
-
+#include "Point.h"
 #define WIDTH 1024
 #define HEIGHT 768
 
@@ -26,6 +26,7 @@ private:
 	static sf::Clock clock;
 	
 	static GameObjectManager gameObjectManager;
+	static sf::ConvexShape shape;
 
 public:
 	Game();
