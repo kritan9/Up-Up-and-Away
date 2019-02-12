@@ -1,6 +1,6 @@
 
 #include "GameObject.h"
-#define VELOCITY 200.0f
+#define VELOCITY 600.0f
 
 float GameObject::velocity = VELOCITY;
 

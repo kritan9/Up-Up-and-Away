@@ -22,12 +22,11 @@ void Game::Start()
 	if (gameState != Uninitialized)
 		return;
 	window.create(sf::VideoMode(WIDTH, HEIGHT, 32), "Up Up And Away");
-	window.setFramerateLimit(60);
 	gameState = Game::Playing;
 	GameObject background;
-	background.Load("images/background.jpg");
+	background.Load("Images/background.jpg");
 	background.SetScale((float)WIDTH/background.GetImageSize().width,(float) HEIGHT / background.GetImageSize().height);
-	Path snakeWay(1500.0f, 700.0f,35);
+	Path snakeWay(3000.0f, WIDTH+100.0f,40);
 	gameObjectManager.Add("Background", &background);
 	gameObjectManager.Add("Path", &snakeWay);
 	clock.restart();
