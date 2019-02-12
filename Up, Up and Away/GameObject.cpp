@@ -1,6 +1,8 @@
 
-#include"pch.h"
 #include "GameObject.h"
+#define VELOCITY 200.0f
+
+float GameObject::velocity = VELOCITY;
 
 GameObject::GameObject()
 {
@@ -57,6 +59,10 @@ void GameObject::SetPosition(float x, float y)
 	{
 		sprite.setPosition(x, y);
 	}
+}
+sf::Vector2f GameObject::GetPosition() const
+{
+	return sprite.getPosition();
 }
 void GameObject::Update(float dt)
 {

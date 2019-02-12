@@ -4,10 +4,11 @@
 class GameObject
 {
 private:
-   sf::Sprite  sprite;
    sf::Texture texture;
    std::string filename;
    bool isLoaded;
+protected:
+	sf::Sprite  sprite;
 public:
 	GameObject();
 
@@ -18,6 +19,9 @@ public:
 	virtual void Draw(sf::RenderWindow&);
 	virtual void Update(float dt);
     void SetPosition(float x,float y);
+	virtual sf::Vector2f GetPosition()const;
+	bool IsLoaded() const{	return isLoaded;}
+	static float velocity;
 	virtual ~GameObject();
 };
 

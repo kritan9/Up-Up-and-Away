@@ -48,3 +48,15 @@ void GameObjectManager::DrawAll(sf::RenderWindow& renderWindow)
 		     itr++;
 		}
 }
+
+void GameObjectManager::UpdateAll(float timeDelta)
+{
+	std::map<std::string, GameObject*>::const_iterator itr = gameObjects.begin();
+
+	while (itr != gameObjects.end())
+	{
+		itr->second->Update(timeDelta);
+		itr++;
+	}
+
+}

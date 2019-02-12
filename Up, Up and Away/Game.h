@@ -5,8 +5,10 @@
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "Point.h"
+
 #define WIDTH 1024
 #define HEIGHT 768
+
 
 class GameObjectManager;
 
@@ -26,11 +28,11 @@ private:
 	static sf::Clock clock;
 	
 	static GameObjectManager gameObjectManager;
-	static sf::ConvexShape shape;
 
 public:
 	Game();
 	static void Start();
+	static sf::RenderWindow& GetWindow() { return window; }
 	~Game();
 };
 

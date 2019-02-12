@@ -13,6 +13,7 @@ public:
 		GameObject* Get(std::string name) const;
 	
 		 void DrawAll(sf::RenderWindow& renderWindow);
+		 void UpdateAll(float timeDelta);
 private:
 	std::map<std::string, GameObject*> gameObjects;
 		
