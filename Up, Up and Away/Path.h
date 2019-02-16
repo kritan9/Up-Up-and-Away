@@ -11,8 +11,8 @@ private:
 	int noOfSpikes;
 	Point p1, p2, p3, p4; //four corners of the road
 	sf::Color color;
-	sf::ConvexShape shape;
-	sf::ConvexShape *spike;
+	std::vector<sf::ConvexShape> road;
+	std::vector<sf::ConvexShape> spike;
 	sf::Color color2;
 	float offset;
 public:
@@ -20,7 +20,7 @@ public:
 	Path(float l, float w,int n);
 	void Draw(sf::RenderWindow&);
 	void Update(float dt);
-	void Spikes(float);
+	void Road(float);
 	~Path();
 };
 

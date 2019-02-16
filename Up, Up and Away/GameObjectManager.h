@@ -21,7 +21,7 @@ private:
 		{
 		  void operator()(const std::pair<std::string, GameObject*> & p) const
 		{
-			delete p.second;
+			delete[] p.second;
 		}
 	};
 

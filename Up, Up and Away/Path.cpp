@@ -4,55 +4,62 @@ Path::Path()
 {
 }
 
-void Path::Spikes(float off)
+void Path::Road(float off)
 {
 	float temp1 = (WIDTH - Width)*0.5f, temp2 = (WIDTH + Width)*0.5f, temp3 = Length / noOfSpikes;
 	for (int i = 0; i < noOfSpikes; i++)
 	{
-		spike[i].setPoint(0, Point(temp1, 0.0f, i*temp3-off).getPosition()); spike[i + noOfSpikes].setPoint(0, Point(temp2, 0.0f, i*temp3-off).getPosition());
-		spike[i].setPoint(1, Point(temp1, 0.0f, i*temp3 + temp3-off).getPosition());  spike[i + noOfSpikes].setPoint(1, Point(temp2, 0.0f, i*temp3 + temp3-off).getPosition());
-		spike[i].setPoint(2, Point(temp1, 40.0f, i*temp3 + temp3 * 0.5f-off).getPosition()); spike[i + noOfSpikes].setPoint(2, Point(temp2, 40.0f, i*temp3 + temp3 * 0.5f-off).getPosition());
+	
+			spike[i].setPoint(0, Point(temp1 + curveX(i*temp3 - off), 0.0f, i*temp3 - off).getPosition());
+			spike[i + noOfSpikes].setPoint(0, Point(temp2 + curveX(i*temp3 - off), 0.0f, i*temp3 - off).getPosition());
+			spike[i].setPoint(1, Point(temp1 + curveX(i*temp3 + temp3 - off), 0.0f, i*temp3 + temp3 - off).getPosition());
+			spike[i + noOfSpikes].setPoint(1, Point(temp2 + curveX(i*temp3 + temp3 - off), 0.0f, i*temp3 + temp3 - off).getPosition());
+			spike[i].setPoint(2, Point(temp1 + curveX(i*temp3 + temp3 * 0.5f - off), 40.0f, i*temp3 + temp3 * 0.5f - off).getPosition());
+			spike[i + noOfSpikes].setPoint(2, Point(temp2 + curveX(i*temp3 + temp3 * 0.5f - off), 40.0f, i*temp3 + temp3 * 0.5f - off).getPosition());
+		
+
+		road[i].setPoint(0, Point(temp1 + curveX(i*temp3 - off), 0.0f, i*temp3 - off).getPosition());
+		road[i].setPoint(1, Point(temp2 + curveX(i*temp3 - off), 0.0f, i*temp3 - off).getPosition());
+		road[i].setPoint(2, Point(temp2 + curveX(i*temp3 + temp3 - off), 0.0f, i*temp3 + temp3 - off).getPosition());
+		road[i].setPoint(3, Point(temp1 + curveX(i*temp3 + temp3 - off), 0.0f, i*temp3 + temp3 - off).getPosition());
 	}
 }
 
 Path::Path(float l, float w,int n):Length(l),Width(w),noOfSpikes(n)
 {
-	p1 = Point((WIDTH - Width)*0.5f, 0, 0);
-	p2 = Point((WIDTH + Width)*0.5f, 0, 0);
-	p3 = Point((WIDTH + Width)*0.5f, 0, Length);
-	p4 = Point((WIDTH - Width)*0.5f, 0, Length);
-	shape = sf::ConvexShape(4);
-	shape.setPoint(0, p1.getPosition());
-	shape.setPoint(1, p2.getPosition());
-	shape.setPoint(2, p3.getPosition());
-	shape.setPoint(3, p4.getPosition());
+	road.resize(noOfSpikes);
 	color = sf::Color(171, 172, 239);
-	color2 = sf::Color(151, 150, 250);
-	shape.setFillColor(color);
-	spike = new sf::ConvexShape[2 * noOfSpikes];
+	color2 = sf::Color(125, 125, 255,255);
+	spike.resize(2 * noOfSpikes); 
 	offset = 0;
 	for (int i = 0; i < n; i++) 
 	{
 		spike[i] = sf::ConvexShape(3); spike[i + n] = sf::ConvexShape(3); 
 		spike[i].setFillColor(color2); spike[i + n].setFillColor(color2);
-		spike[i].setOutlineThickness(1); spike[i + n].setOutlineThickness(1);
-		spike[i].setOutlineColor(sf::Color::Black); spike[i + n].setOutlineColor(sf::Color::Black);
+			spike[i].setOutlineThickness(1); spike[i + n].setOutlineThickness(1);
+		spike[i].setOutlineColor(sf::Color(0,0,0,10)); spike[i + n].setOutlineColor(sf::Color(0,0,0,10));
+
+		road[i] = sf::ConvexShape(4); 
+		road[i].setFillColor(color);
+		
 	}
-	Spikes(offset);
+	Road(offset);
 }
 void Path::Draw(sf::RenderWindow& window)
 {
-	window.draw(shape);
-	for (int i = 0; i < 2 * noOfSpikes; i++) window.draw(spike[i]);
+	
+	for (int i = noOfSpikes-1; i >= 0; i--) {
+		window.draw(road[i]); window.draw(spike[i]); window.draw(spike[i + noOfSpikes]);
+	}
 }
 void Path::Update(float dt)
 {
 	offset += velocity * dt;
 	if (offset >= Length / noOfSpikes) offset = 0;
-	Spikes(offset);
+	Road(offset);
 }
 
 Path::~Path()
 {
-	delete[] spike;
+	spike.clear();
 }

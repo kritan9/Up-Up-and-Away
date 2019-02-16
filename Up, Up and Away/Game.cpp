@@ -6,6 +6,7 @@
 Game::GameState Game::gameState = Uninitialized;
 sf::RenderWindow Game::window;
 sf::Clock Game::clock;
+sf::Clock Game::clockTotal;
 GameObjectManager Game::gameObjectManager;
 
 Game::Game()
@@ -26,10 +27,11 @@ void Game::Start()
 	GameObject background;
 	background.Load("Images/background.jpg");
 	background.SetScale((float)WIDTH/background.GetImageSize().width,(float) HEIGHT / background.GetImageSize().height);
-	Path snakeWay(3000.0f, WIDTH+100.0f,40);
+	Path snakeWay(GameObject::roadLength, GameObject::roadWidth,55);
 	gameObjectManager.Add("Background", &background);
 	gameObjectManager.Add("Path", &snakeWay);
 	clock.restart();
+	clockTotal.restart();
 	while (!IsExiting())
 	{
 		GameLoop();

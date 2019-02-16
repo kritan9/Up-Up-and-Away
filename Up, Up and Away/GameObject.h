@@ -11,7 +11,8 @@ protected:
 	sf::Sprite  sprite;
 public:
 	GameObject();
-
+	static float curveX(float z);
+	static float roadLength, roadWidth;
 	virtual void Load(std::string file);
 	virtual void SetScale( float x,float y);
     void CropImage(int x, int y, int width, int height);

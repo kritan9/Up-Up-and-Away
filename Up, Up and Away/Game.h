@@ -31,6 +31,7 @@ private:
 
 public:
 	Game();
+	static sf::Clock clockTotal;
 	static void Start();
 	static sf::RenderWindow& GetWindow() { return window; }
 	~Game();
