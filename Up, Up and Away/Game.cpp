@@ -24,7 +24,6 @@ void Game::Start()
 {
 	if (gameState != Uninitialized)
 		return;
-	window.create(sf::VideoMode(WIDTH, HEIGHT, 32), "Up Up And Away");
 	gameState = Game::Playing;
 	GameObject background;
 	background.Load("Images/background.jpg");

@@ -17,20 +17,18 @@ class Game
 private:
 	static bool IsExiting();
 	static void GameLoop();
-
-	enum GameState {
-		Uninitialized,  Paused,
-		ShowingMenu, Playing, ShowingScore, Exiting
-	};
-
-	static GameState gameState;
-	static sf::RenderWindow window;
 	static sf::Clock clock;
 	
 	static GameObjectManager gameObjectManager;
 
 public:
 	Game();
+	enum GameState {
+		Uninitialized,  Paused,
+		ShowingMenu, Playing, ShowingScore, Exiting
+	};
+	static GameState gameState;
+	static sf::RenderWindow window;
 	static sf::Clock clockTotal;
 	static sf::Event event;
 	static void Start();

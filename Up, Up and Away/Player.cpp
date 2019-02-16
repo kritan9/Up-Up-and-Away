@@ -1,10 +1,11 @@
 #include "Player.h"
-
+#define PLAYERVELOCITY 3000.0f
 Player::Player() {}
 
 Player::Player(float Width,float Height)
 {
-	p.setPoint((WIDTH - Width)*0.5f, 150.0f, 100.0f);
+	x = (WIDTH - Width)*0.5f; y = 150.0f; z = 100.0f;
+	p.setPoint(x,y,z);
 	width = Width; height = Height;
 	Load("Images/character.png");
 	SetScale(Width*p.scale / texture.getSize().x, p.scale* Height / texture.getSize().y);
@@ -15,10 +16,14 @@ Player::Player(float Width,float Height)
 
 void Player::Update(float dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) sprite.move(sf::Vector2f(-GameObject::velocity*dt, 0.0f));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) sprite.move(sf::Vector2f(GameObject::velocity*dt, 0.0f));
-	if (sprite.getPosition().x < (WIDTH - GameObject::roadWidth+350.0f)*0.5f) sprite.setPosition((WIDTH - GameObject::roadWidth+350.0f)*0.5f,sprite.getPosition().y);
-	if (sprite.getPosition().x > (WIDTH + GameObject::roadWidth - 350.0f)*0.5f - width*p.scale) sprite.setPosition((WIDTH + GameObject::roadWidth - 350.0f)*0.5f-width*p.scale, sprite.getPosition().y);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))	x-=PLAYERVELOCITY*dt;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))   x+=PLAYERVELOCITY*dt;
+	if (x < (WIDTH - GameObject::roadWidth)*0.5f) x= (WIDTH - GameObject::roadWidth)*0.5f;
+	if (x > (WIDTH + GameObject::roadWidth)*0.5f - width*p.scale) x=(WIDTH + GameObject::roadWidth )*0.5f-width*p.scale;
+
+	p.setPoint(x, y, z);
+	sprite.setRotation(-40.0f*(x+width*0.5) / GameObject::roadWidth + 20.0f);
+	SetPosition(p.getScreenPoint().x, p.getScreenPoint().y);
 }
 
 Player::~Player()

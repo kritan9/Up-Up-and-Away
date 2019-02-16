@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include <iostream>
 #define PI 3.14159265f
-#define VELOCITY 1500.0f
+#define VELOCITY 2000.0f
 float sineConstant =  PI /(2* GameObject::roadLength*0.9f);
 float GameObject::velocity = VELOCITY;
 float GameObject::roadLength = 5000.0f, GameObject::roadWidth = WIDTH + 100.0f;
