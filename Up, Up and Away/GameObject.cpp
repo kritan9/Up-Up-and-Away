@@ -2,17 +2,17 @@
 #include "GameObject.h"
 #include <iostream>
 #define PI 3.14159265f
-#define VELOCITY 600.0f
+#define VELOCITY 1500.0f
 float sineConstant =  PI /(2* GameObject::roadLength*0.9f);
 float GameObject::velocity = VELOCITY;
 float GameObject::roadLength = 5000.0f, GameObject::roadWidth = WIDTH + 100.0f;
 float GameObject::curveX(float z) 
 {
-	if (Game::clockTotal.getElapsedTime().asSeconds()<10.0f) return 0;
+	if (Game::clockTotal.getElapsedTime().asSeconds()<1.0f) return 0;
 	else {
 		if (z > roadLength*0.1) {
 			float temp;
-			float dt = Game::clockTotal.getElapsedTime().asSeconds() - 10.0f;
+			float dt = Game::clockTotal.getElapsedTime().asSeconds() - 1.0f;
 			static sf::Clock timePause;
 			static float amp = 0;
 			static int flag = 0,flag2=0;

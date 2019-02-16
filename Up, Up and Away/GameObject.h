@@ -4,10 +4,10 @@
 class GameObject
 {
 private:
-   sf::Texture texture;
    std::string filename;
    bool isLoaded;
 protected:
+	sf::Texture texture;
 	sf::Sprite  sprite;
 public:
 	GameObject();

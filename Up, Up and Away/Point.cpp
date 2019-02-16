@@ -7,6 +7,11 @@ Point::Point(float x,float y,float z)
 	this->x = x; this->y = y; this -> z = z;
 	this->project();
 }
+void Point::setPoint(float x, float y, float z)
+{
+	this->x = x; this->y = y; this->z = z;
+	this->project();
+}
 
 
 Point::~Point()

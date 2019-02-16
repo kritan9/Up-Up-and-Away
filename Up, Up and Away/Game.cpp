@@ -1,6 +1,7 @@
 #include"pch.h"
 #include "Game.h"
 #include "Path.h"
+#include "Player.h"
 #include <iostream>
 
 Game::GameState Game::gameState = Uninitialized;
@@ -8,6 +9,7 @@ sf::RenderWindow Game::window;
 sf::Clock Game::clock;
 sf::Clock Game::clockTotal;
 GameObjectManager Game::gameObjectManager;
+sf::Event Game::event;
 
 Game::Game()
 {
@@ -26,10 +28,13 @@ void Game::Start()
 	gameState = Game::Playing;
 	GameObject background;
 	background.Load("Images/background.jpg");
-	background.SetScale((float)WIDTH/background.GetImageSize().width,(float) HEIGHT / background.GetImageSize().height);
+	background.SetScale((float)WIDTH / background.GetImageSize().width, (float)HEIGHT / background.GetImageSize().height);
+
+	Player player(150.0f,150.0f);
 	Path snakeWay(GameObject::roadLength, GameObject::roadWidth,55);
 	gameObjectManager.Add("Background", &background);
 	gameObjectManager.Add("Path", &snakeWay);
+	gameObjectManager.Add("Player",&player );
 	clock.restart();
 	clockTotal.restart();
 	while (!IsExiting())
@@ -50,7 +55,6 @@ bool Game::IsExiting()
 
 void Game::GameLoop()
 {
-	sf::Event event;
 	window.pollEvent(event);
 
 		switch (gameState)
