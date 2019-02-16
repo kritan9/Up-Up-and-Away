@@ -6,7 +6,9 @@ class Player :
 	public GameObject
 {
 	float x, y, z;
+	int jump;
 	Point p;
+	sf::Clock clock;
 public:
 	Player();
 	float width, height;

@@ -65,7 +65,6 @@ void Game::GameLoop()
 			gameObjectManager.UpdateAll(clock.getElapsedTime().asSeconds());
 			clock.restart();
 			gameObjectManager.DrawAll(window);
-
 			window.display();
 
 			if (event.type == sf::Event::Closed)
