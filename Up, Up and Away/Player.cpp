@@ -17,8 +17,8 @@ void Player::Update(float dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) sprite.move(sf::Vector2f(-GameObject::velocity*dt, 0.0f));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) sprite.move(sf::Vector2f(GameObject::velocity*dt, 0.0f));
-	if (sprite.getPosition().x < (WIDTH - GameObject::roadWidth+200.0f)*0.5f) sprite.setPosition((WIDTH - GameObject::roadWidth+200.0f)*0.5f,sprite.getPosition().y);
-	if (sprite.getPosition().x > (WIDTH + GameObject::roadWidth - 200.0f)*0.5f - width*p.scale) sprite.setPosition((WIDTH + GameObject::roadWidth - 200.0f)*0.5f-width*p.scale, sprite.getPosition().y);
+	if (sprite.getPosition().x < (WIDTH - GameObject::roadWidth+350.0f)*0.5f) sprite.setPosition((WIDTH - GameObject::roadWidth+350.0f)*0.5f,sprite.getPosition().y);
+	if (sprite.getPosition().x > (WIDTH + GameObject::roadWidth - 350.0f)*0.5f - width*p.scale) sprite.setPosition((WIDTH + GameObject::roadWidth - 350.0f)*0.5f-width*p.scale, sprite.getPosition().y);
 }
 
 Player::~Player()
