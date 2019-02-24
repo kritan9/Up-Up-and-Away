@@ -86,10 +86,12 @@ void GameObjectManager::UpdateAll(float timeDelta)
 		if (obstacles[i]->destroy())
 		{
 			obstacles.erase(obstacles.begin() + i);
-			length -= 1;
+			length -= 1; i--;
 		}
-		obstacles[i]->Update(timeDelta);
 	}
+	length = obstacles.size();
+	for(int i=0;i<length;i++)
+		obstacles[i]->Update(timeDelta);
 
 }
 void GameObjectManager::Collision(Player &player)
@@ -108,7 +110,7 @@ void GameObjectManager::Collision(Player &player)
 			else Game::gameState = Game::Dead;
 			
 		}
-			i++;
+		i++;
 	}
 
 }
