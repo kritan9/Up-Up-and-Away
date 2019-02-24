@@ -32,3 +32,9 @@ sf::Vector2f Point::getPosition()
 {
 	return sf::Vector2f(X, Y);
 }
+
+float Point::Scale() 
+{
+	if (scale > 1.0f) return 1.0f;
+	else return scale;
+};

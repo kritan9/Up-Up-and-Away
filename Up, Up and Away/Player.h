@@ -7,14 +7,18 @@ class Player :
 {
 	float x, y, z;
 	int jump;
+	int yLevel;
 	Point p;
 	sf::Clock clock;
+	float width, height;
 public:
 	Player();
-	float width, height;
 	Player(float Width, float Height);
+	bool isPlayer() { return true; }
 	void Update(float dt);
+	void Reset();
 	sf::Vector3f position3d();
+	sf::Vector3f size();
 	~Player();
 };
 

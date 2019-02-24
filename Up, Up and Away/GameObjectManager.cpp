@@ -1,5 +1,17 @@
 #include"pch.h"
 #include "GameObjectManager.h"
+#include <iostream>
+
+int BoxCollision(sf::Vector3f aPos, sf::Vector3f aSize, sf::Vector3f bPos, sf::Vector3f bSize)
+{
+	if (aPos.x < bPos.x && aPos.x < (bPos.x + bSize.x) && (aPos.x + aSize.x) < bPos.x && (aPos.x + aSize.x) < (bPos.x + bSize.x)) return 0;
+	if (aPos.x > bPos.x && aPos.x > (bPos.x + bSize.x) && (aPos.x + aSize.x) > bPos.x && (aPos.x + aSize.x) > (bPos.x + bSize.x)) return 0;
+	if (aPos.y < bPos.y && aPos.y < (bPos.y + bSize.y) && (aPos.y + aSize.y) < bPos.y && (aPos.y + aSize.y) < (bPos.y + bSize.y)) return 0;
+	if (aPos.y > bPos.y && aPos.y > (bPos.y + bSize.y) && (aPos.y + aSize.y) > bPos.y && (aPos.y + aSize.y) > (bPos.y + bSize.y)) return 0;
+	if (aPos.z < bPos.z && aPos.z < (bPos.z + bSize.z) && (aPos.z + aSize.z) < bPos.z && (aPos.z + aSize.z) < (bPos.z + bSize.z)) return 0;
+	if (aPos.z > bPos.z && aPos.z > (bPos.z + bSize.z) && (aPos.z + aSize.z) > bPos.z && (aPos.z + aSize.z) > (bPos.z + bSize.z)) return 0;
+	return 1;
+}
 
 GameObjectManager::GameObjectManager()
 {
@@ -9,11 +21,13 @@ GameObjectManager::GameObjectManager()
 GameObjectManager::~GameObjectManager()
 {
    std::for_each(gameObjects.begin(), gameObjects.end(), GameObjectDeallocator());
+   obstacles.clear();
 }
 
 void GameObjectManager::Add(std::string name, GameObject* gameObject)
 {
-   gameObjects.insert(std::pair<std::string, GameObject*>(name, gameObject));
+	if (gameObject->isCoin() || gameObject->isObstacle())	obstacles.push_back(gameObject);
+    else gameObjects.insert(std::pair<std::string, GameObject*>(name, gameObject));
 }
 
 void GameObjectManager::Remove(std::string name)
@@ -42,21 +56,66 @@ int GameObjectManager::GetObjectCount() const
 void GameObjectManager::DrawAll(sf::RenderWindow& renderWindow)
 {		
 	std::map<std::string, GameObject*>::const_iterator itr = gameObjects.begin();
+	int length = obstacles.size();
 		 while (itr != gameObjects.end())
 		{
+			 if(!itr->second->isPlayer())
 		     itr->second->Draw(renderWindow);
 		     itr++;
 		}
+
+		 for (int i = 0; i < length; i++)
+		 {
+			 obstacles[i]->Draw(renderWindow);
+		 }
+		 gameObjects.find("Player")->second->Draw(renderWindow);
 }
 
 void GameObjectManager::UpdateAll(float timeDelta)
 {
 	std::map<std::string, GameObject*>::const_iterator itr = gameObjects.begin();
+	int length = obstacles.size();
 
 	while (itr != gameObjects.end())
 	{
 		itr->second->Update(timeDelta);
 		itr++;
 	}
+	for (int i = 0; i < length; i++)
+	{
+		if (obstacles[i]->destroy())
+		{
+			obstacles.erase(obstacles.begin() + i);
+			length -= 1;
+		}
+		obstacles[i]->Update(timeDelta);
+	}
 
+}
+void GameObjectManager::Collision(Player &player)
+{
+	int length = obstacles.size();
+	int i = 0;
+	while (i<length)
+	{
+		if (BoxCollision(player.position3d(), player.size(), obstacles[i]->position3d(), obstacles[i]->size()) == 1)
+		{
+			if (obstacles[i]->isCoin())
+			{
+				obstacles.erase(obstacles.begin()+i);
+				length -= 1; i--;
+			}
+			else Game::gameState = Game::Dead;
+			
+		}
+			i++;
+	}
+
+}
+
+void GameObjectManager::Reset()
+{
+	obstacles.clear();
+	Game::level = 1;
+	GameObject::velocity = VELOCITY;
 }
