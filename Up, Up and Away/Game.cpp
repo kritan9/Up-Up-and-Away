@@ -36,7 +36,7 @@ int Game::Random(int a, int b)
 }
 void Game::Start()
 {
-	window.create(sf::VideoMode(WIDTH, HEIGHT, 32), "Up Up And Away");
+	window.create(sf::VideoMode(WIDTH, HEIGHT, 32), "Up Up And Away",sf::Style::Default);
 	coinBuffer.loadFromFile("Sounds/coin.wav");
 	coin.setBuffer(coinBuffer);
 	deathBuffer.loadFromFile("Sounds/death.wav");
@@ -128,7 +128,3 @@ void Game::GameLoop()
 		}
 
 }
-
-
-
-
