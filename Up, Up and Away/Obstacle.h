@@ -8,7 +8,7 @@ class Obstacle :
 	float width, height, thickness;
 public:
 
-	Obstacle( float w = 400.0f, float h = 100.0f, float th = 50.0f);
+	Obstacle( float w = 300.0f, float h = 100.0f, float th = 50.0f);
 	void Update(float dt);
 	bool isObstacle() { return true; }
 	bool destroy();

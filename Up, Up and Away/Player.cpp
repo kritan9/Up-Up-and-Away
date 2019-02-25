@@ -60,12 +60,12 @@ void Player::Update(float dt)
 
 sf::Vector3f Player::position3d()
 {
-	return sf::Vector3f(x, y, z);
+	return sf::Vector3f(x+0.1f*width, y, z);
 }
 
 sf::Vector3f Player::size()
 {
-	return sf::Vector3f(width, -50.0f, -300.0f);
+	return sf::Vector3f(0.9f*width, -50.0f, -300.0f);
 }
 
 Player::~Player()

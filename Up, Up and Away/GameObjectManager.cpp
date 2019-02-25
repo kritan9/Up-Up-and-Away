@@ -125,5 +125,5 @@ void GameObjectManager::Reset()
 	obstacles.clear();
 	Game::level = 1;
 	GameObject::velocity = VELOCITY;
-	Game::spawnTime = 500.0f / GameObject::velocity;
+	Game::spawnTime = 300.0f / GameObject::velocity;
 }

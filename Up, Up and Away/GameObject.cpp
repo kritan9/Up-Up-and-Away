@@ -4,7 +4,7 @@
 #define PI 3.14159265f
 float sineConstant =  PI /(2* GameObject::roadLength*0.9f);
 float GameObject::velocity = VELOCITY;
-float GameObject::roadLength = 5000.0f, GameObject::roadWidth = WIDTH + 100.0f;
+float GameObject::roadLength = 5000.0f, GameObject::roadWidth = WIDTH-100.0f ;
 float GameObject::curveX(float z) 
 {
 	if (Game::clockTotal.getElapsedTime().asSeconds()<1.0f) return 0;
