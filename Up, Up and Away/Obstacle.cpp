@@ -1,14 +1,14 @@
 #include "Obstacle.h"
 
 float roadBeg = (WIDTH - GameObject::roadWidth)*0.5f;
-Obstacle::Obstacle() {}
 
-Obstacle::Obstacle(float X, float Y, float w,float h,float th)//x coordinate is from the left side of the road
+
+Obstacle::Obstacle(float w,float h,float th)//x coordinate is from the left side of the road
 {
 	width = w; height = h; thickness = th;
-	roadX = X;
+	roadX = (float)Game::Random(0, (int)(GameObject::roadWidth - thickness));
 	z = GameObject::roadLength;
-	x = roadBeg + X + GameObject::curveX(z); y = Y;
+	x = roadBeg + roadX + GameObject::curveX(z); y = Game::Random(1, 3)*Game::yLevel;
 	p.setPoint(x, y, z);
 	Load("Images/Obstacle.png");
 	SetScale(width*p.Scale() / texture.getSize().x, p.Scale()* height / texture.getSize().y);
@@ -36,7 +36,7 @@ sf::Vector3f Obstacle::size()
 }
 
 bool Obstacle::destroy() {
-	if (z < 0.0f) return true;
+	if (z < -10.0f) return true;
 	else return false;
 }
 

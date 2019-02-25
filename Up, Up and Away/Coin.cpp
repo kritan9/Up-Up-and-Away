@@ -1,13 +1,13 @@
 #include "Coin.h"
-float roadBegin = (WIDTH - GameObject::roadWidth)*0.5f;
-Coin::Coin() {}
 
-Coin::Coin(float X, float Y)//x coordinate is from the left side of the road
+float roadBegin = (WIDTH - GameObject::roadWidth)*0.5f;
+
+Coin::Coin()//x coordinate is from the left side of the road
 {
 	width = 60.0f; height = 60.0f; thickness = 30.0f;
-	roadX = X;
+	roadX = (float)Game::Random(0, (int)(GameObject::roadWidth - thickness));
 	z = GameObject::roadLength;
-	x =roadBegin +X+GameObject::curveX(z); y = Y-20.0f;
+	x =roadBegin +roadX+GameObject::curveX(z); y = Game::Random(1, 3)*Game::yLevel -20.0f;
 	p.setPoint(x, y, z);
 	Load("Images/coin.png");
 	SetScale(width*p.Scale() / texture.getSize().x, p.Scale()* height / texture.getSize().y);
@@ -35,7 +35,7 @@ sf::Vector3f Coin::size()
 }
 
 bool Coin::destroy() {
-	if (z < 0.0f) return true;
+	if (z < -10.0f) return true;
 	else return false;
 }
 

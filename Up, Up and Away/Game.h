@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
 #include "Point.h"
+#include "Death.h"
+#include <SFML/Audio.hpp>
 #include <time.h>
 
 #define WIDTH 1024
@@ -18,13 +20,13 @@ private:
 	static void GameLoop();
 	static sf::Clock clock;
 	static GameObjectManager gameObjectManager;
-	static float spawnTime;
 public:
 	Game();
 	enum GameState {
 		Uninitialized,  Paused,
 		Menu, Playing, ShowingScore, Exiting, Dead
 	};
+	static float spawnTime;
 	static bool IsExiting();
 	static int Random(int a,int b);
 	static int level;
@@ -33,6 +35,8 @@ public:
 	static sf::RenderWindow window;
 	static sf::Clock clockTotal;
 	static sf::Event event;
+	static sf::Sound coin;
+	static sf::Sound death;
 	static void Start();
 	static sf::RenderWindow& GetWindow() { return window; }
 	~Game();

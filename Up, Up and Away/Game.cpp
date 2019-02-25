@@ -17,7 +17,10 @@ sf::Event Game::event;
 int Game::level = 1;
 float Game::yLevel = 150.0f;
 float Game::spawnTime = 500.0f / GameObject::velocity;
-
+sf::Sound Game::coin;
+sf::Sound Game::death;
+sf::SoundBuffer coinBuffer;
+sf::SoundBuffer deathBuffer;
 Game::Game()
 {
 }
@@ -33,6 +36,10 @@ int Game::Random(int a, int b)
 void Game::Start()
 {
 	window.create(sf::VideoMode(WIDTH, HEIGHT, 32), "Up Up And Away");
+	coinBuffer.loadFromFile("Sounds/coin.wav");
+	coin.setBuffer(coinBuffer);
+	deathBuffer.loadFromFile("Sounds/death.wav");
+	death.setBuffer(deathBuffer);
 	GameObject background;
 	player.Reset();
 	background.Load("Images/background.jpg");
@@ -67,18 +74,26 @@ void Game::GameLoop()
 		case Playing:
 		{
 
-			static int q = 1; static float delT = 0.0f;
-			delT += clock.getElapsedTime().asSeconds();
+			static int q = 1; static float delT = 0.0f; static float delT2 = 0.0f;
+			delT += clock.getElapsedTime().asSeconds(); delT2 += clock.getElapsedTime().asSeconds();
+			if (delT2 > 3.0f)
+			{
+				delT2 = 0.0f;
+				level++;
+				if (GameObject::velocity <= 20000.0f)
+				GameObject::velocity = 500.0f;
+				spawnTime = 500.0f / GameObject::velocity;
+			}
 			if (delT >= spawnTime)
 			{
 				if (q == 4)
 				{	
-					if(Random(0,level)!=0) gameObjectManager.Add(" ", new Obstacle((int)Random(0, (int)(GameObject::roadWidth - 400.0f)), Random(1, 3)*yLevel));
+					if(Random(0,level)!=0) gameObjectManager.Add(" ", new Obstacle());
 					q = 0;
 				}
 				else
 				{
-					if (Random(0, 1) == 1) gameObjectManager.Add(" ",new Coin((int)Random(0,(int)(GameObject::roadWidth-400.0f)), Random(1, 3)*yLevel));
+					if (Random(0, 1) == 1) gameObjectManager.Add(" ",new Coin());
 					q++;
 				}
 				delT = 0.0f;
@@ -91,7 +106,6 @@ void Game::GameLoop()
 			window.display();
 
 			gameObjectManager.Collision(player);
-
 			if (event.type == sf::Event::Closed)
 			{
 				gameState = Game::Exiting;

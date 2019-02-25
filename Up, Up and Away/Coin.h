@@ -8,7 +8,6 @@ class Coin :
 	float width, height, thickness;
 public:
 	Coin();
-	Coin(float X, float Y);
 	void Update(float dt);
 	bool destroy();
 	bool isCoin() { return true; }

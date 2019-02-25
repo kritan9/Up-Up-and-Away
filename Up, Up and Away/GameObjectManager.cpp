@@ -104,10 +104,15 @@ void GameObjectManager::Collision(Player &player)
 		{
 			if (obstacles[i]->isCoin())
 			{
+				Game::coin.play();
 				obstacles.erase(obstacles.begin()+i);
 				length -= 1; i--;
 			}
-			else Game::gameState = Game::Dead;
+			else
+			{
+				Game::death.play();
+				Game::gameState = Game::Dead;
+			}
 			
 		}
 		i++;
@@ -120,4 +125,5 @@ void GameObjectManager::Reset()
 	obstacles.clear();
 	Game::level = 1;
 	GameObject::velocity = VELOCITY;
+	Game::spawnTime = 500.0f / GameObject::velocity;
 }
