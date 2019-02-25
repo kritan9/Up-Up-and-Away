@@ -81,7 +81,7 @@ void Game::GameLoop()
 				delT2 = 0.0f;
 				level++;
 				if (GameObject::velocity <= 20000.0f)
-				GameObject::velocity = 500.0f;
+				GameObject::velocity += 500.0f;
 				spawnTime = 500.0f / GameObject::velocity;
 			}
 			if (delT >= spawnTime)
