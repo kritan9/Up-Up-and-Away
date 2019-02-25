@@ -1,0 +1,18 @@
+﻿  Coin.cpp
+  Death.cpp
+  Game.cpp
+  GameObject.cpp
+  GameObjectManager.cpp
+c:\users\prabin\documents\up-up-and-away\up, up and away\gameobjectmanager.cpp(52): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\prabin\documents\up-up-and-away\up, up and away\gameobjectmanager.cpp(59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\prabin\documents\up-up-and-away\up, up and away\gameobjectmanager.cpp(77): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\prabin\documents\up-up-and-away\up, up and away\gameobjectmanager.cpp(92): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\prabin\documents\up-up-and-away\up, up and away\gameobjectmanager.cpp(99): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Main.cpp
+c:\users\prabin\documents\up-up-and-away\up, up and away\main.cpp(6): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Obstacle.cpp
+  Path.cpp
+  Player.cpp
+  Point.cpp
+  Generating Code...
+sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'x86' conflicts with target machine type 'x64'
