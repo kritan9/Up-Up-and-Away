@@ -37,6 +37,7 @@ public:
 	static sf::Event event;
 	static sf::Sound coin;
 	static sf::Sound death;
+	static sf::Music bkgMusic;
 	static void Start();
 	static sf::RenderWindow& GetWindow() { return window; }
 	~Game();

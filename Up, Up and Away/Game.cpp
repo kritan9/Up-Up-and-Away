@@ -19,6 +19,7 @@ float Game::yLevel = 150.0f;
 float Game::spawnTime = 500.0f / GameObject::velocity;
 sf::Sound Game::coin;
 sf::Sound Game::death;
+sf::Music Game::bkgMusic;
 sf::SoundBuffer coinBuffer;
 sf::SoundBuffer deathBuffer;
 Game::Game()
@@ -40,6 +41,10 @@ void Game::Start()
 	coin.setBuffer(coinBuffer);
 	deathBuffer.loadFromFile("Sounds/death.wav");
 	death.setBuffer(deathBuffer);
+	bkgMusic.openFromFile("Sounds/Stereo Madness.wav");
+	bkgMusic.setVolume(60);
+	bkgMusic.setLoop(true);
+	bkgMusic.play();
 	GameObject background;
 	player.Reset();
 	background.Load("Images/background.jpg");
@@ -117,6 +122,8 @@ void Game::GameLoop()
 			gameObjectManager.Reset();
 			player.Reset();
 			gameState = Playing;
+			bkgMusic.stop();
+			bkgMusic.play();
 		}
 		}
 

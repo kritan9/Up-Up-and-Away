@@ -20,7 +20,7 @@ void Coin::Update(float dt)
 	x = roadX+roadBegin + GameObject::curveX(z);
 	p.setPoint(x, y, z);
 	SetScale(width*p.Scale() / texture.getSize().x, p.Scale()* height / texture.getSize().y);
-	sprite.setRotation(-40.0f*(x-curveX(z) + width * 0.5f) / GameObject::roadWidth + 20.0f);
+	sprite.setRotation(-20.0f*(x-curveX(z) + width * 0.5f) / GameObject::roadWidth + 10.0f);
 	SetPosition(p.getScreenPoint().x, p.getScreenPoint().y);
 }
 
