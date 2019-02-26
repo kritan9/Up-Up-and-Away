@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Point.h"
 #include "Death.h"
+#include "Menu.h"
 #include <SFML/Audio.hpp>
 #include <time.h>
 
@@ -13,6 +14,8 @@
 
 class GameObjectManager;
 class GameObject;
+class Death;
+class Menu;
 
 class Game
 {
@@ -20,11 +23,13 @@ private:
 	static void GameLoop();
 	static sf::Clock clock;
 	static GameObjectManager gameObjectManager;
+	static Death d;
+	static Menu m;
 public:
 	Game();
 	enum GameState {
 		Uninitialized,  Paused,
-		Menu, Playing, ShowingScore, Exiting, Dead
+		Menu, Playing, Leaderboard, Exiting, Dead
 	};
 	static float spawnTime;
 	static bool IsExiting();

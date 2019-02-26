@@ -3,7 +3,7 @@
 
 int main()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	Game::Start();
 	return 0;
 }

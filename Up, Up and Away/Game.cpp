@@ -8,7 +8,7 @@
 #include "string.h"
 #include <iostream>
 
-Game::GameState Game::gameState = Game::Playing;//this should be initialized to menu
+Game::GameState Game::gameState = Game::Menu;
 sf::RenderWindow Game::window;
 sf::Clock Game::clock;
 sf::Clock Game::clockTotal;
@@ -22,6 +22,8 @@ sf::Sound Game::coin;
 sf::Sound Game::death;
 sf::SoundBuffer coinBuffer;
 sf::SoundBuffer deathBuffer;
+Death Game::d;
+Menu Game::m;
 std::string audioFiles[]={ "Sounds/menuLoop.ogg","Sounds/StereoMadness.ogg","Sounds/TimeMachine.ogg","Sounds/TheoryOfEverything.ogg","Sounds/Jumper.ogg","Sounds/HexagonForce.ogg","Sounds/GeometricalDominator.ogg","Sounds/Electroman.ogg","Sounds/Electrodynamix.ogg","Sounds/DryOut.ogg","Sounds/Deadlocked.ogg","Sounds/Cycles.ogg","Sounds/Clutterfunk.ogg","Sounds/Clubstep.ogg","Sounds/CantLetGo.ogg","Sounds/BlastProcessing.ogg","Sounds/BaseAfterBase.ogg","Sounds/BackOnTrack.ogg" };
 int audioNum = 18; int audioPos = 0;
 sf::Music bkgMusic[18];
@@ -53,7 +55,7 @@ void Game::Start()
 		bkgMusic[i].openFromFile(audioFiles[i]);
 		bkgMusic[i].setVolume(50);
 	}
-	audioPos = Random(1, audioNum - 1);
+	audioPos = 0;
 	bkgMusic[audioPos].play();
 	GameObject background;
 	player.Reset();
@@ -63,8 +65,6 @@ void Game::Start()
 	gameObjectManager.Add("Background", &background);
 	gameObjectManager.Add("Path", &snakeWay);
 	gameObjectManager.Add("Player",&player );
-	clock.restart();
-	clockTotal.restart();
 	while (!IsExiting() )
 	{
 		GameLoop();
@@ -127,21 +127,59 @@ void Game::GameLoop()
 			window.display();
 
 			gameObjectManager.Collision(player);
+			if(gameState==Dead)
+			{
+				gameObjectManager.Reset();
+				player.Reset();
+				bkgMusic[audioPos].stop();
+				audioPos = 0;
+				bkgMusic[audioPos].play();
+			}
 			if (event.type == sf::Event::Closed)
 			{
 				gameState = Game::Exiting;
 			}
 			break;
 		}
+		
 		case Dead:
 		{
-			gameObjectManager.Reset();
-			player.Reset();
-			gameState = Playing;
-			bkgMusic[audioPos].stop();
-			audioPos = Random(1, audioNum - 1);
-			bkgMusic[audioPos].play();
+			window.clear();
+			d.Update();
+			d.Draw(window);
+			window.display();
+
+			if (gameState == Playing)
+			{
+				clock.restart();
+				clockTotal.restart();
+				bkgMusic[audioPos].stop();
+			}
+			if (event.type == sf::Event::Closed)
+			{
+				gameState = Game::Exiting;
+			}
+
+			break;
 		}
+		case Menu:
+		{
+			window.clear();
+			m.Update();
+			m.Draw(window);
+			window.display();
+
+			if (gameState == Playing)
+			{
+				bkgMusic[audioPos].stop();
+				audioPos = Random(1, audioNum - 1);
+				bkgMusic[audioPos].play();
+				clock.restart();
+				clockTotal.restart();
+			}
+			break;
+		}
+
 		}
 
 }

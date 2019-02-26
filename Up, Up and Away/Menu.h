@@ -1,21 +1,16 @@
 #pragma once
 #include "Game.h"
-
-namespace Mouse
-{
-	bool Intersect(float,float,float, float);
-}
-
-class Death
+class Menu
 {
 	sf::Texture t;
-	sf::Sprite deathBar;
+	sf::Sprite menuBar;
 	sf::Texture opts[2];
-	sf::Sprite options[3];
+	sf::Sprite options[4];
 	float offsetX, offsetY;
 public:
-	Death();
+	Menu();
 	void Draw(sf::RenderWindow&);
 	void Update();
+	~Menu();
 };
 
