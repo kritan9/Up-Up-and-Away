@@ -68,7 +68,6 @@ void GameObject::Load(std::string file)
 		isLoaded = true;
 	}
 }
-
 void GameObject::SetScale( float x,float y)
 {
 	sprite.setScale(sf::Vector2f(x,y));

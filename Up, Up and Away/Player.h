@@ -1,6 +1,7 @@
 #pragma once
 #include"pch.h"
 #include "Game.h"
+#include "animation.h"
 
 class Player :
 	public GameObject
@@ -11,6 +12,7 @@ class Player :
 	Point p;
 	sf::Clock clock;
 	float width, height;
+	animation character;
 public:
 	Player();
 	Player(float Width, float Height);

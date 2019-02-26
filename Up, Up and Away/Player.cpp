@@ -19,11 +19,12 @@ Player::Player(float Width,float Height)
 	Load("Images/character2.png");
 	SetScale(Width*p.scale / texture.getSize().x, p.scale* Height / texture.getSize().y);
 	SetPosition(p.getScreenPoint().x, p.getScreenPoint().y);
-
+	character.load("Images/character",2, sf::seconds(2));
 }
 
 void Player::Update(float dt)
 {
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))	x-=PLAYERVELOCITY*dt;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))   x+=PLAYERVELOCITY*dt;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && jump == 0 && (yLevel==2 || yLevel==1))
@@ -56,6 +57,9 @@ void Player::Update(float dt)
 	p.setPoint(x, y, z);
 	sprite.setRotation(-40.0f*(x+width*0.5f) / GameObject::roadWidth + 20.0f);
 	SetPosition(p.getScreenPoint().x, p.getScreenPoint().y);
+	sf::Texture temp;
+	//temp.loadFromFile("Images/character2_.png");
+	//Load("Images/character2_.png");
 }
 
 sf::Vector3f Player::position3d()
