@@ -2,20 +2,31 @@
 
 animation::animation()
 {}
-animation::animation(char &p,sf::Time t,unsigned int _n):now(0),time(t),n(_n)
+animation::animation(char &p,unsigned int nu,sf::Time t) :aniTime(t),imgNum(nu)
 {
-	texture = new sf::Texture[n];
-	for (int i = 0; i < n; i++)
-	{
-		std::string temp=path+'/'+static_cast<char> (i)+".jpg";
-		texture[i].loadFromFile(temp);
-	}
+	path = &p;
 }
-sf::Texture animation::frame(sf::Time t)
+void animation::start()
 {
-	now = static_cast<int>((t.asMilliseconds()/(n*time.asMilliseconds())));
-	if (now > (n-1)) return texture[n-1];
-	return texture[now];
+	startTime = Game::clockTotal.getElapsedTime();
+}
+sf::Texture animation::frame()
+{
+	unsigned int now = static_cast<int>((Game::clockTotal.getElapsedTime() - startTime).asMilliseconds()*imgNum / aniTime.asMilliseconds());
+	if (now > (imgNum - 1)) now = (imgNum - 1);
+	sf::Texture temp;
+	std::string pa = path + '/' + static_cast<char>(now+1)+".jgp";
+	temp.loadFromFile(pa);
+	return temp;
+}
+sf::Texture animation::frame(sf::Time ti)
+{
+	unsigned int now = static_cast<int>(ti.asMilliseconds()*imgNum / aniTime.asMilliseconds());
+	if (now > (imgNum - 1)) now = (imgNum - 1);
+	sf::Texture temp;
+	std::string pa = path + '/' + static_cast<char>(now + 1) + ".jgp";
+	temp.loadFromFile(pa);
+	return temp;
 }
 animation::~animation()
 {
