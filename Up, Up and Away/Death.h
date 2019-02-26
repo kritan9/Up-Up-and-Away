@@ -9,6 +9,8 @@ namespace Mouse
 class Death
 {
 	sf::Texture t;
+	sf::Texture tx;
+	sf::Sprite txt;
 	sf::Sprite deathBar;
 	sf::Texture opts[2];
 	sf::Sprite options[3];

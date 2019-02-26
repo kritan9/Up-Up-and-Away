@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "Death.h"
 #include "Menu.h"
+#include "CharacterMenu.h"
 #include <SFML/Audio.hpp>
 #include <time.h>
 
@@ -16,6 +17,7 @@ class GameObjectManager;
 class GameObject;
 class Death;
 class Menu;
+class CharacterMenu;
 
 class Game
 {
@@ -25,11 +27,12 @@ private:
 	static GameObjectManager gameObjectManager;
 	static Death d;
 	static Menu m;
+	static CharacterMenu cm;
 public:
 	Game();
 	enum GameState {
 		Uninitialized,  Paused,
-		Menu, Playing, Leaderboard, Exiting, Dead
+		Menu, Playing, Leaderboard, Exiting, Dead,Character
 	};
 	static float spawnTime;
 	static bool IsExiting();

@@ -6,9 +6,19 @@ float TimePeriod = 0.5f;
 float uSpeed = 4.05f*Game::yLevel / TimePeriod;
 float acc = 2 * uSpeed / TimePeriod;  
 float t;
+std::string character[]={"Images/character2.png" ,"Images/character.png" };
 Player::Player() {}
 
-void Player::Reset() { x = (WIDTH - width)*0.5f; y = 250.0f; z = 50.0f; jump = 0; yLevel = 2; }
+void Player::Reset()
+{ 
+	x = (WIDTH - width)*0.5f; y = 250.0f; z = 50.0f; jump = 0; yLevel = 2; 
+}
+
+void Player::Reset(int n)
+{
+	Load(character[n%2]);
+	x = (WIDTH - width)*0.5f; y = 250.0f; z = 50.0f; jump = 0; yLevel = 2;
+}
 
 Player::Player(float Width,float Height)
 {

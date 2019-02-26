@@ -24,6 +24,7 @@ sf::SoundBuffer coinBuffer;
 sf::SoundBuffer deathBuffer;
 Death Game::d;
 Menu Game::m;
+CharacterMenu Game::cm;
 std::string audioFiles[]={ "Sounds/menuLoop.ogg","Sounds/StereoMadness.ogg","Sounds/TimeMachine.ogg","Sounds/TheoryOfEverything.ogg","Sounds/Jumper.ogg","Sounds/HexagonForce.ogg","Sounds/GeometricalDominator.ogg","Sounds/Electroman.ogg","Sounds/Electrodynamix.ogg","Sounds/DryOut.ogg","Sounds/Deadlocked.ogg","Sounds/Cycles.ogg","Sounds/Clutterfunk.ogg","Sounds/Clubstep.ogg","Sounds/CantLetGo.ogg","Sounds/BlastProcessing.ogg","Sounds/BaseAfterBase.ogg","Sounds/BackOnTrack.ogg" };
 int audioNum = 18; int audioPos = 0;
 sf::Music bkgMusic[18];
@@ -174,9 +175,23 @@ void Game::GameLoop()
 				bkgMusic[audioPos].stop();
 				audioPos = Random(1, audioNum - 1);
 				bkgMusic[audioPos].play();
+				player.Reset(CharacterMenu::pos);
 				clock.restart();
 				clockTotal.restart();
 			}
+			if (event.type == sf::Event::Closed)
+			{
+				gameState = Game::Exiting;
+			}
+			break;
+		}
+		case Character:
+		{
+			window.clear();
+			cm.Update();
+			cm.Draw(window);
+			window.display();
+
 			if (event.type == sf::Event::Closed)
 			{
 				gameState = Game::Exiting;

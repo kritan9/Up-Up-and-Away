@@ -1,7 +1,5 @@
 #include "Menu.h"
 
-
-
 Menu::Menu()
 {
 	offsetX = 60.0f; offsetY = 70.0f;
@@ -12,8 +10,12 @@ Menu::Menu()
 	options[1].setTexture(opts[0]);
 	options[2].setTexture(opts[0]);
 	options[3].setTexture(opts[0]);
+
 	menuBar.setTexture(t);
 	menuBar.setPosition(0.5f*(WIDTH - menuBar.getTextureRect().width), 0.5f*(HEIGHT - menuBar.getTextureRect().height));
+	tx.loadFromFile("Images/text1.png");
+	txt.setTexture(tx);
+	txt.setPosition(menuBar.getPosition());
 	for (int i = 0; i < 4; i++)
 		options[i].setPosition(menuBar.getPosition() + sf::Vector2f(offsetX, offsetY + 100.0f*i));
 }
@@ -23,6 +25,7 @@ void Menu::Draw(sf::RenderWindow& window)
 	window.draw(menuBar);
 	for (int i = 0; i < 4; i++)
 		window.draw(options[i]);
+	window.draw(txt);
 }
 
 void Menu::Update()
@@ -50,7 +53,7 @@ void Menu::Update()
 			{
 				Game::gameState = Game::Playing;
 			}
-			//else if (mouseFlag == 2) {Game::gameState = Game::LeaderBoard;}
+			else if (mouseFlag == 2) {Game::gameState = Game::Character;}
 			//else if (mouseFlag == 3) {Game::gameState = Game::Credits;}
 			else if (mouseFlag == 4)
 			{

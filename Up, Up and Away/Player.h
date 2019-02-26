@@ -17,6 +17,7 @@ public:
 	bool isPlayer() { return true; }
 	void Update(float dt);
 	void Reset();
+	void Reset(int);
 	sf::Vector3f position3d();
 	sf::Vector3f size();
 	~Player();

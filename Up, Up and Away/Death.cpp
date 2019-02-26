@@ -12,6 +12,9 @@ Death::Death()
 	options[2].setTexture(opts[0]);
 	deathBar.setTexture(t);
 	deathBar.setPosition(0.5f*(WIDTH - deathBar.getTextureRect().width), 0.5f*(HEIGHT - deathBar.getTextureRect().height));
+	tx.loadFromFile("Images/text3.png");
+	txt.setTexture(tx);
+	txt.setPosition(deathBar.getPosition());
 	for(int i=0;i<3;i++)
 	options[i].setPosition(deathBar.getPosition() + sf::Vector2f(offsetX, offsetY + 200.0f + 100.0f*i));
 }
@@ -21,6 +24,7 @@ void Death::Draw(sf::RenderWindow& window)
 	window.draw(deathBar);
 	for (int i = 0; i < 3; i++)
 		window.draw(options[i]);
+	window.draw(txt);
 }
 void Death::Update()
 {
