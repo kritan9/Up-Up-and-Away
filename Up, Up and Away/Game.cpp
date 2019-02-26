@@ -177,6 +177,10 @@ void Game::GameLoop()
 				clock.restart();
 				clockTotal.restart();
 			}
+			if (event.type == sf::Event::Closed)
+			{
+				gameState = Game::Exiting;
+			}
 			break;
 		}
 

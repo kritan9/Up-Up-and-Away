@@ -4,7 +4,7 @@
 
 Menu::Menu()
 {
-	offsetX = 60.0f; offsetY = 50.0f;
+	offsetX = 60.0f; offsetY = 70.0f;
 	t.loadFromFile("Images/x.png");
 	opts[0].loadFromFile("Images/Button.png");
 	opts[1].loadFromFile("Images/Button2.png");

@@ -26,12 +26,12 @@ void Coin::Update(float dt)
 
 sf::Vector3f Coin::position3d()
 {
-	return sf::Vector3f(x, y, z);
+	return sf::Vector3f(x-10.0f, y, z);
 }
 
 sf::Vector3f Coin::size()
 {
-	return sf::Vector3f(width, -height, thickness);
+	return sf::Vector3f(width+20.0f, -height, thickness);
 }
 
 bool Coin::destroy() {
